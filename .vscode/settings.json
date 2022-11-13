@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "GitHub",
+        "projectKey": "juanjoguti_SPORTS-ANALYTICS"
+    }
+}
