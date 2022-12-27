@@ -18,7 +18,7 @@ class FBrefUrlBuilder():
         short_name, full_name = competition_name.identifiers()
         return f'en/comps/{short_name}/stats/players/{full_name}-Stats'
 
-    def get_players_data(self, competition_name: CompetitionName):
+    def get_players_data_url(self, competition_name: CompetitionName):
 
         path_to_players_data = self.__path_to_players_data(competition_name)
         return self.url_builder.get_url_to_path(path_to_players_data)
