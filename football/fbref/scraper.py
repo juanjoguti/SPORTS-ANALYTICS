@@ -1,5 +1,6 @@
 from utils.scraper import Scraper
 from football.fbref.url_builder import FBrefUrlBuilder
+from football.constants.seasons import Seasons
 from football.constants.competitions import CompetitionName
 
 
@@ -59,10 +60,11 @@ class FbrefScraper():
             'Matches'
         ]
     
-    def get_players_standard_stats_table(self):
+    def get_players_standard_stats_table(self, season: Seasons):
 
+        url = self.fbref_url_builder.get_players_data_url(
+            season, CompetitionName.Big5
+        )
         return self.scraper.get_table_by_identifier(
-            self.fbref_url_builder.get_players_data_url(CompetitionName.Big5),
-            {'id': 'stats_standard'},
-            self.standard_stats_headers
+            url, {'id': 'stats_standard'}, self.standard_stats_headers
         )

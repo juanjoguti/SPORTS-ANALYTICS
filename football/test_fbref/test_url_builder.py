@@ -2,6 +2,7 @@ import pytest
 import requests
 from unittest.mock import Mock
 from utils.url_builder import UrlBuilder
+from football.constants.seasons import Seasons
 from football.fbref.url_builder import FBrefUrlBuilder
 from football.constants.competitions import CompetitionName
 
@@ -19,10 +20,11 @@ def url_builder_mock(expected_url):
     yield mock
 
 @pytest.fixture
-def expected_big5_path():
+def expected_2223_big5_path():
 
+    season = Seasons.S2223
     short_name, full_name = CompetitionName.Big5.identifiers()
-    return f'en/comps/{short_name}/stats/players/{full_name}-Stats'
+    return f'en/comps/{short_name}/{season}/stats/players/{season}-{full_name}-Stats'
 
 def test_url_builder():
 
@@ -32,11 +34,11 @@ def test_url_builder():
     assert url == 'https://fbref.com'
     assert requests.get(url).ok
 
-def test_get_players_data(url_builder_mock, expected_url, expected_big5_path):
+def test_get_players_data(url_builder_mock, expected_url, expected_2223_big5_path):
 
     fbref_url_builder = FBrefUrlBuilder(url_builder_mock)
 
-    url = fbref_url_builder.get_players_data_url(CompetitionName.Big5)
+    url = fbref_url_builder.get_players_data_url(Seasons.S2223, CompetitionName.Big5)
     
     assert url == expected_url
-    url_builder_mock.get_url_to_path.assert_called_once_with(expected_big5_path)
+    url_builder_mock.get_url_to_path.assert_called_once_with(expected_2223_big5_path)

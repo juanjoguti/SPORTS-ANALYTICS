@@ -4,6 +4,7 @@ from unittest.mock import Mock
 from utils.scraper import Scraper
 from football.fbref.scraper import FbrefScraper
 from football.fbref.url_builder import FBrefUrlBuilder
+from football.constants.seasons import Seasons
 from football.constants.competitions import CompetitionName
 
 
@@ -93,9 +94,10 @@ def test_get_players_standard_stats_table(
     expected_url
 ):
 
+    season = Seasons.S2223
     fbref_scraper = FbrefScraper(scraper_mock, fbref_url_builder_mock)
 
-    table = fbref_scraper.get_players_standard_stats_table()
+    table = fbref_scraper.get_players_standard_stats_table(season)
 
     scraper_mock.get_table_by_identifier.assert_called_once_with(
         expected_url,
@@ -103,6 +105,7 @@ def test_get_players_standard_stats_table(
         fbref_scraper.standard_stats_headers
     )
     fbref_url_builder_mock.get_players_data_url.assert_called_once_with(
+        season,
         CompetitionName.Big5
     )
     assert len(table) == len(expected_table)
