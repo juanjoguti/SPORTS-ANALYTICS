@@ -41,7 +41,7 @@ jobs:
         uses: Rishabh510/Path-lister-action@master
         with:
           path: ".github/"
-          type: ".yml"
+          type: ".xml"
 
       - name: Output results
         run: |
