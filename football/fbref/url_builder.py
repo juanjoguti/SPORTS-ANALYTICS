@@ -4,9 +4,9 @@ from football.constants.competitions import CompetitionName
 
 class FBrefUrlBuilder():
 
-    def __init__(self):
+    def __init__(self, url_builder : UrlBuilder = UrlBuilder('fbref')):
 
-        self.__url_builder = UrlBuilder('fbref')
+        self.__url_builder = url_builder
 
     @property
     def url_builder(self):

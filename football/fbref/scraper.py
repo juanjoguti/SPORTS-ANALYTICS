@@ -2,12 +2,13 @@ from utils.scraper import Scraper
 from football.fbref.url_builder import FBrefUrlBuilder
 from football.constants.competitions import CompetitionName
 
+
 class FbrefScraper():
 
-    def __init__(self) -> None:
+    def __init__(self, scraper: Scraper, fbref_url_builder: FBrefUrlBuilder):
         
-        self.__scraper = Scraper()
-        self.__fbref_url_builder = FBrefUrlBuilder()
+        self.__scraper = scraper
+        self.__fbref_url_builder = fbref_url_builder
 
     @property
     def scraper(self):
