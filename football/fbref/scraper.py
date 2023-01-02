@@ -7,7 +7,7 @@ from football.constants.competitions import CompetitionName
 class FbrefScraper():
 
     def __init__(self, scraper: Scraper, fbref_url_builder: FBrefUrlBuilder):
-        
+
         self.__scraper = scraper
         self.__fbref_url_builder = fbref_url_builder
 
@@ -59,7 +59,7 @@ class FbrefScraper():
             'npxG+xAG per 90',
             'Matches'
         ]
-    
+
     def get_players_standard_stats_table(self, season: Seasons):
 
         url = self.fbref_url_builder.get_players_data_url(

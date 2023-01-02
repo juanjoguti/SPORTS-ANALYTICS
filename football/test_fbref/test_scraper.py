@@ -13,10 +13,12 @@ def fbref_scraper():
 
     return FbrefScraper(Scraper(), FBrefUrlBuilder())
 
+
 @pytest.fixture
 def expected_table():
 
     return pd.DataFrame([1, 2, 3], columns=['Test'])
+
 
 @pytest.fixture
 def scraper_mock(expected_table):
@@ -25,10 +27,12 @@ def scraper_mock(expected_table):
     mock.get_table_by_identifier.return_value = expected_table
     yield mock
 
+
 @pytest.fixture
 def expected_url():
 
     return 'https://test_url.com'
+
 
 @pytest.fixture
 def fbref_url_builder_mock(expected_url):
@@ -37,13 +41,16 @@ def fbref_url_builder_mock(expected_url):
     mock.get_players_data_url.return_value = expected_url
     yield mock
 
+
 def test_scraper(fbref_scraper):
 
     assert isinstance(fbref_scraper.scraper, Scraper)
 
+
 def test_fbref_url_builder(fbref_scraper):
 
     assert isinstance(fbref_scraper.fbref_url_builder, FBrefUrlBuilder)
+
 
 @pytest.mark.parametrize(
     'header', [
@@ -86,6 +93,7 @@ def test_standard_stats_headers(fbref_scraper, header):
 
     assert len(fbref_scraper.standard_stats_headers) == 33
     assert header in fbref_scraper.standard_stats_headers
+
 
 def test_get_players_standard_stats_table(
     scraper_mock,
