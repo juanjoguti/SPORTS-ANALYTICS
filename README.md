@@ -1,7 +1,7 @@
 # SPORTS-ANALYTICS
 
 <p align="center">
-// Your content
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=juanjoguti_SPORTS-ANALYTICS)
 </p>
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=juanjoguti_SPORTS-ANALYTICS)
