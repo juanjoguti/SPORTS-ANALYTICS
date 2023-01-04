@@ -17,7 +17,7 @@ def fbref_scraper():
 @pytest.fixture
 def expected_table():
 
-    return pd.DataFrame([1, 2, 3], columns=['Test'])
+    return pd.DataFrame([[1, 2], [3, 4]], columns=['Rk', 'Other column'])
 
 
 @pytest.fixture
@@ -54,6 +54,7 @@ def test_fbref_url_builder(fbref_scraper):
 
 @pytest.mark.parametrize(
     'header', [
+        'Rk',
         'Player',
         'Nationality',
         'Position',
@@ -91,7 +92,7 @@ def test_fbref_url_builder(fbref_scraper):
 )
 def test_standard_stats_headers(fbref_scraper, header):
 
-    assert len(fbref_scraper.standard_stats_headers) == 33
+    assert len(fbref_scraper.standard_stats_headers) == 34
     assert header in fbref_scraper.standard_stats_headers
 
 
@@ -117,4 +118,5 @@ def test_get_players_standard_stats_table(
         CompetitionName.Big5
     )
     assert len(table) == len(expected_table)
-    assert all(table.columns == expected_table.columns)
+    assert 'Rk' not in table.columns
+    assert 'Other column' in table.columns
