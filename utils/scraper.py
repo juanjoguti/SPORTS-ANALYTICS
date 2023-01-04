@@ -7,10 +7,6 @@ from bs4 import BeautifulSoup
 
 class Scraper():
 
-    def __init__(self) -> None:
-        # TODO document why this method is empty
-        pass
-
     def __get_table_headers(self, table):
 
         headers = table.find('thead').findAll('tr')
@@ -27,12 +23,13 @@ class Scraper():
 
     def __get_table_data(self, table, headers):
 
+        data = []
         body = table.find('tbody')
-        data = [
-            col.text.strip().encode().decode('utf-8')
-            for row in body.findAll('tr')
-            for col in row.findAll('td')
-        ]
+        for row in body.findAll('tr'):
+            for col in row.findAll('th', {'scope': 'row'}):
+                data.append(col.text.strip().encode().decode('utf-8'))
+            for col in row.findAll('td'):
+                data.append(col.text.strip().encode().decode('utf-8'))
         data = np.asarray(data)
         data = data.reshape((len(data)//len(headers), len(headers)))
         return data.tolist()
@@ -40,11 +37,10 @@ class Scraper():
     def get_table_by_identifier(self, url, table_identifier, headers=None):
 
         response = requests.get(url)
-        comm = re.compile('')
+        comm = re.compile('<!--|-->')
         soup = BeautifulSoup(comm.sub('', response.text), 'lxml')
         table = soup.find('table', table_identifier)
         if headers is None:
             headers = self.__get_table_headers(table)
         data = self.__get_table_data(table, headers)
         return pd.DataFrame(data, columns=headers)
-        
