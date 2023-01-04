@@ -2,6 +2,9 @@ pytest
 pytest-cov
 tox
 coverage
+fastapi
+fastapi_versioning
+httpx
 numpy
 pandas
 requests
