@@ -36,7 +36,7 @@ class Scraper():
     def get_table_by_identifier(self, url, table_identifier, headers=None):
 
         response = requests.get(url)
-        comm = re.compile('')
+        comm = re.compile('<!--|-->')
         soup = BeautifulSoup(comm.sub('', response.text), 'lxml')
         table = soup.find('table', table_identifier)
         if headers is None:
