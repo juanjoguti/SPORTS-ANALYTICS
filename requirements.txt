@@ -3,6 +3,7 @@ pytest-cov
 tox
 coverage
 fastapi
+fastapi_versioning
 numpy
 pandas
 requests
