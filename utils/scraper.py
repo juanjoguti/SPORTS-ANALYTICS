@@ -23,12 +23,13 @@ class Scraper():
 
     def __get_table_data(self, table, headers):
 
+        data = []
         body = table.find('tbody')
-        data = [
-            col.text.strip().encode().decode('utf-8')
-            for row in body.findAll('tr')
-            for col in row.findAll('td')
-        ]
+        for row in body.findAll('tr'):
+            for col in row.findAll('th', {'scope': 'row'}):
+                data.append(col.text.strip().encode().decode('utf-8'))
+            for col in row.findAll('td'):
+                data.append(col.text.strip().encode().decode('utf-8'))
         data = np.asarray(data)
         data = data.reshape((len(data)//len(headers), len(headers)))
         return data.tolist()
